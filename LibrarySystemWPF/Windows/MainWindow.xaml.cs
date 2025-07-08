@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibrarySystemWPF.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace LibrarySystemWPF
         public MainWindow()
         {
             InitializeComponent();
+            MainContentFrame.Navigate(new DashboardPage());
+        }
+
+        private void ManageUsers_Click(object sender, RoutedEventArgs e)
+        {
+            MainContentFrame.Navigate(new ManageUsersPage());
+        }
+
+        private void Dashboard_Click(object sender, RoutedEventArgs e)
+        {
             MainContentFrame.Navigate(new DashboardPage());
         }
     }

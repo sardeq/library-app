@@ -1,0 +1,17 @@
+﻿<Window x:Class="LibrarySystemWPF.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Login" Height="300" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+            <TextBlock Text="Username" Margin="0 0 0 5"/>
+            <TextBox x:Name="txtUsername"/>
+
+            <TextBlock Text="Password" Margin="0 10 0 5"/>
+            <PasswordBox x:Name="txtPassword"/>
+
+            <Button Content="Login" Click="BtnLogin_Click" Margin="0 20 0 0" Padding="10 5"/>
+        </StackPanel>
+    </Grid>
+</Window>

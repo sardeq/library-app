@@ -28,10 +28,10 @@
                            Margin="10 20 10 30"
                            HorizontalAlignment="Center"/>
 
-                <Button Content="Dashboard" FontSize="16"/>
+                <Button Content="Dashboard" Click="Dashboard_Click" FontSize="16"/>
                 
                 <!-- Admin Only -->
-                <Button Content="Manage Users" FontSize="16"/>
+                <Button Content="Manage Users" Click="ManageUsers_Click" FontSize="16"/>
                 <Button Content="Manage Books" FontSize="16"/>
                 <Button Content="Returns" FontSize="16"/>
                 <Button Content="Reports" FontSize="16"/>
