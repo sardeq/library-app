@@ -1,0 +1,11 @@
+**/.vs/
+**/bin/
+**/obj/
+**/App.config
+App.config
+*.user
+*.suo
+*.db
+*.db.lock
+*.log
+*.pdb

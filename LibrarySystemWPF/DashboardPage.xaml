@@ -1,0 +1,65 @@
+﻿<Page x:Class="LibrarySystemWPF.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="Transparent">
+    <StackPanel>
+        <TextBlock Text="Welcome to Library System" 
+                   FontSize="28"
+                   Foreground="{StaticResource LightBlueBrush}"
+                   Margin="0 0 0 20"/>
+
+        <WrapPanel>
+            <!-- Statistics Cards -->
+            <Border Background="#1E3257" 
+                    CornerRadius="8"
+                    Padding="20"
+                    Margin="10"
+                    Width="250"
+                    Height="150">
+                <StackPanel>
+                    <TextBlock Text="Total Books" 
+                               FontSize="16"
+                               Foreground="{StaticResource CyanAccentBrush}"/>
+                    <TextBlock Text="1,254" 
+                               FontSize="32"
+                               FontWeight="Bold"
+                               Margin="0 10"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="#1E3257" 
+                    CornerRadius="8"
+                    Padding="20"
+                    Margin="10"
+                    Width="250"
+                    Height="150">
+                <StackPanel>
+                    <TextBlock Text="Reviews" 
+                               FontSize="16"
+                               Foreground="{StaticResource CyanAccentBrush}"/>
+                    <TextBlock Text="324" 
+                               FontSize="32"
+                               FontWeight="Bold"
+                               Margin="0 10"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="#1E3257" 
+                    CornerRadius="8"
+                    Padding="20"
+                    Margin="10"
+                    Width="250"
+                    Height="150">
+                <StackPanel>
+                    <TextBlock Text="New Members" 
+                               FontSize="16"
+                               Foreground="{StaticResource CyanAccentBrush}"/>
+                    <TextBlock Text="24" 
+                               FontSize="32"
+                               FontWeight="Bold"
+                               Margin="0 10"/>
+                </StackPanel>
+            </Border>
+        </WrapPanel>
+    </StackPanel>
+</Page>
