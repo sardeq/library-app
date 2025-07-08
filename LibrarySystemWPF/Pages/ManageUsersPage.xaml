@@ -26,11 +26,28 @@
         <DataGrid x:Name="UsersGrid" 
                   Grid.Row="1"
                   AutoGenerateColumns="False"
-                  Background="Transparent"
+                  Background="{StaticResource DarkBlueBrush}"
                   Foreground="White"
                   HeadersVisibility="Column"
                   IsReadOnly="True"
-                  SelectionMode="Single">
+                  SelectionMode="Single"
+                  GridLinesVisibility="None">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="{StaticResource DarkBlueBrush}"/>
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="{StaticResource CyanAccentBrush}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Padding" Value="5"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ClientID}" Width="50"/>
                 <DataGridTextColumn Header="Username" Binding="{Binding ClientName}" Width="150"/>
