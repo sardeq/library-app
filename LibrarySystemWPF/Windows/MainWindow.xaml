@@ -31,11 +31,11 @@
                 <Button Content="Dashboard" Click="Dashboard_Click" FontSize="16"/>
                 
                 <!-- Admin Only -->
-                <Button Content="Manage Users" Click="ManageUsers_Click" FontSize="16"/>
-                <Button Content="Manage Books" FontSize="16"/>
-                <Button Content="Returns" FontSize="16"/>
-                <Button Content="Reports" FontSize="16"/>
-                <Button Content="Analysis" FontSize="16"/>
+                <Button Content="Manage Users" Click="ManageUsers_Click" FontSize="16" BorderBrush="Red"/>
+                <Button Content="Manage Books" FontSize="16"  BorderBrush="Red"/>
+                <Button Content="Returns" FontSize="16"  BorderBrush="Red"/>
+                <Button Content="Reports" FontSize="16"  BorderBrush="Red"/>
+                <Button Content="Analysis" FontSize="16"  BorderBrush="Red"/>
 
                 <!-- General -->
                 <Button Content="Chatbot" FontSize="16"/>
