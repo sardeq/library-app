@@ -33,25 +33,5 @@ namespace LibrarySystemWPF
                 MessageBox.Show("Invalid credentials");
             }
         }
-
-        private bool ValidateUser(string username, string password)
-        {
-            string query = "SELECT COUNT(1) FROM Clients WHERE ClientName = @Username AND Password = @Password";
-            SqlParameter[] parameters = {
-                new SqlParameter("@Username", username),
-                new SqlParameter("@Password", password)
-            };
-
-            try
-            {
-                var result = _db.ExecuteScalar(query, parameters);
-                return (result != null && Convert.ToInt32(result) == 1);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Database error: {ex.Message}");
-                return false;
-            }
-        }
     }
 }
