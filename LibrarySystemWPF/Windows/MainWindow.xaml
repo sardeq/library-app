@@ -29,13 +29,13 @@
                            HorizontalAlignment="Center"/>
 
                 <Button Content="Dashboard" Click="Dashboard_Click" FontSize="16"/>
-                
+
                 <!-- Admin Only -->
-                <Button Content="Manage Users" Click="ManageUsers_Click" FontSize="16" BorderBrush="Red"/>
-                <Button Content="Manage Books" Click="ManageBooks_Click" FontSize="16"  BorderBrush="Red"/>
-                <Button Content="Returns" FontSize="16"  BorderBrush="Red"/>
-                <Button Content="Reports" FontSize="16"  BorderBrush="Red"/>
-                <Button Content="Analysis" FontSize="16"  BorderBrush="Red"/>
+                <Button x:Name="ManageUsersButton" Content="Manage Users" Click="ManageUsers_Click" FontSize="16" BorderBrush="Red"/>
+                <Button x:Name="ManageBooksButton" Content="Manage Books" Click="ManageBooks_Click" FontSize="16"  BorderBrush="Red"/>
+                <Button x:Name="ReturnsButton" Content="Returns" FontSize="16"  BorderBrush="Red"/>
+                <Button x:Name="ReportsButton" Content="Reports" FontSize="16"  BorderBrush="Red"/>
+                <Button x:Name="AnalysisButton" Content="Analysis" FontSize="16"  BorderBrush="Red"/>
 
                 <!-- General -->
                 <Button Content="Chatbot" FontSize="16"/>
@@ -45,7 +45,7 @@
 
                 <StackPanel VerticalAlignment="Bottom" Margin="0 25 0 0">
                     <Button Content="My Account" FontSize="14" Background="Transparent" BorderThickness="0"/>
-                    <Button Content="Logout" FontSize="14" Background="Transparent" BorderThickness="0"/>
+                    <Button Content="Logout" FontSize="14" Background="Transparent" BorderThickness="0" Click="Logout_Click"/>
                 </StackPanel>
             </StackPanel>
         </Border>

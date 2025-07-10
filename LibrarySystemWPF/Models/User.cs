@@ -9,9 +9,9 @@ namespace LibrarySystemWPF.Models
 
     public enum UserType
     {
-        Student = 0,
-        Teacher = 1,
-        Admin = 2
+        Student = 3,
+        Teacher = 2,
+        Admin = 1
     }
 
     public enum Status

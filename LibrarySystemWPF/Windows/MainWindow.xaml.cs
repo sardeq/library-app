@@ -1,4 +1,5 @@
-﻿using LibrarySystemWPF.Pages;
+﻿using LibrarySystemWPF.Models;
+using LibrarySystemWPF.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,26 @@ namespace LibrarySystemWPF
         {
             InitializeComponent();
             MainContentFrame.Navigate(new DashboardPage());
+            SetUserPermissions();
+        }
+
+        private void SetUserPermissions()
+        {
+            bool isAdmin = false;
+
+            if (UserSession.CurrentUser != null && UserSession.CurrentUser.Type == (int)UserType.Admin)
+            {
+                isAdmin = true;
+            }
+
+            if (!isAdmin)
+            {
+                ManageUsersButton.Visibility = Visibility.Collapsed;
+                ManageBooksButton.Visibility = Visibility.Collapsed;
+                ReturnsButton.Visibility = Visibility.Collapsed;
+                ReportsButton.Visibility = Visibility.Collapsed;
+                AnalysisButton.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void ManageUsers_Click(object sender, RoutedEventArgs e)
@@ -51,5 +72,20 @@ namespace LibrarySystemWPF
         {
             MainContentFrame.Navigate(new MyBooksPage());
         }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                UserSession.CurrentUser = null;
+                var loginWindow = new LoginWindow();
+                loginWindow.Show();
+                this.Close();
+            }
+        }
+
+
     }
 }
