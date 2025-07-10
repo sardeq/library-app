@@ -6,40 +6,62 @@
       xmlns:local="clr-namespace:LibrarySystemWPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-      Title="ManageBooksPage">
+      Title="ManageBooksPage"
+      Background="{StaticResource DarkBlueBrush}">
 
-    <Grid Background="{StaticResource DarkBlueBrush}">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Header -->
+        <TextBlock Text="Manage Books" 
+                   Grid.Row="0"
+                   FontSize="24" 
+                   Foreground="{StaticResource LightBlueBrush}"
+                   Margin="0 0 0 20"/>
+
         <!-- Action Buttons -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Add" Click="BtnAdd_Click" Margin="5" Padding="15 5"
-                    Background="{StaticResource CyanAccentBrush}" 
-                    Foreground="{StaticResource DarkBlueBrush}"/>
-            <Button Content="Edit" Click="BtnEdit_Click" Margin="5" Padding="15 5"
-                    Background="{StaticResource CyanAccentBrush}" 
-                    Foreground="{StaticResource DarkBlueBrush}"/>
-            <Button Content="Delete" Click="BtnDelete_Click" Margin="5" Padding="15 5"
-                    Background="{StaticResource CyanAccentBrush}" 
-                    Foreground="{StaticResource DarkBlueBrush}"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Add" Click="BtnAdd_Click" Margin="5" Padding="15 5"/>
+            <Button Content="Edit" Click="BtnEdit_Click" Margin="5" Padding="15 5"/>
+            <Button Content="Delete" Click="BtnDelete_Click" Margin="5" Padding="15 5"/>
         </StackPanel>
 
         <!-- Books DataGrid -->
-        <DataGrid x:Name="BooksGrid" Grid.Row="1" Margin="10" AutoGenerateColumns="False"
-                  Background="#1E3257" Foreground="White" RowBackground="#1E3257" 
-                  AlternatingRowBackground="#0A1429" HeadersVisibility="Column"
-                  IsReadOnly="True" BorderThickness="0" GridLinesVisibility="None">
+        <DataGrid x:Name="BooksGrid" Grid.Row="2" Margin="10" AutoGenerateColumns="False"
+                  Background="{StaticResource DarkBlueBrush}"
+                  Foreground="White"
+                  HeadersVisibility="Column"
+                  IsReadOnly="True"
+                  BorderThickness="0"
+                  GridLinesVisibility="None">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="{StaticResource DarkBlueBrush}"/>
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="{StaticResource CyanAccentBrush}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Padding" Value="5"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Book ID" Binding="{Binding BookID}" Width="1.5*" Foreground="White"/>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="2*" Foreground="White"/>
-                <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="1.5*" Foreground="White"/>
-                <DataGridTextColumn Header="Release Date" Binding="{Binding ReleaseDate, StringFormat=d}" Width="1*" Foreground="White"/>
-                <DataGridTextColumn Header="Available" Binding="{Binding BooksAvailable}" Width="0.8*" Foreground="White"/>
-                <DataGridTextColumn Header="Borrow Type" Binding="{Binding BorrowTypeDesc}" Width="1.2*" Foreground="White"/>
-                <DataGridTextColumn Header="Duration (days)" Binding="{Binding BorrowDuration}" Width="0.8*" Foreground="White"/>
+                <DataGridTextColumn Header="Book ID" Binding="{Binding BookID}" Width="1.5*"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="2*"/>
+                <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="1.5*"/>
+                <DataGridTextColumn Header="Release Date" Binding="{Binding ReleaseDate, StringFormat=d}" Width="1*"/>
+                <DataGridTextColumn Header="Available" Binding="{Binding BooksAvailable}" Width="0.8*"/>
+                <DataGridTextColumn Header="Borrow Type" Binding="{Binding BorrowTypeDesc}" Width="1.2*"/>
+                <DataGridTextColumn Header="Duration (days)" Binding="{Binding BorrowDuration}" Width="0.8*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

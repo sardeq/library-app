@@ -12,8 +12,8 @@
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
@@ -22,9 +22,15 @@
                    Foreground="{StaticResource LightBlueBrush}"
                    Margin="0 0 0 20"/>
 
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button x:Name="BtnAdd" Content="Add User" Click="BtnAdd_Click" Margin="5" Padding="15 5"/>
+            <Button x:Name="BtnEdit" Content="Edit User" Click="BtnEdit_Click" Margin="5" Padding="15 5"/>
+            <Button x:Name="BtnDelete" Content="Delete User" Click="BtnDelete_Click" Margin="5" Padding="15 5"/>
+        </StackPanel>
+
         <!-- Users Grid -->
         <DataGrid x:Name="UsersGrid" 
-                  Grid.Row="1"
+                  Grid.Row="2"
                   AutoGenerateColumns="False"
                   Background="{StaticResource DarkBlueBrush}"
                   Foreground="White"
@@ -59,10 +65,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
-            <Button x:Name="BtnAdd" Content="Add User" Click="BtnAdd_Click" Padding="15 5" Margin="0 0 10 0"/>
-            <Button x:Name="BtnEdit" Content="Edit User" Click="BtnEdit_Click" Padding="15 5" Margin="0 0 10 0"/>
-            <Button x:Name="BtnDelete" Content="Delete User" Click="BtnDelete_Click" Padding="15 5"/>
-        </StackPanel>
+
     </Grid>
 </Page>
