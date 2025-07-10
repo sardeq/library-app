@@ -33,60 +33,60 @@
         </Grid.ColumnDefinitions>
 
         <!-- Username -->
-        <TextBlock Text="Username:" Grid.Row="0" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Username:" Grid.Row="0" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <TextBox x:Name="txtUsername" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5" 
                  Text="{Binding ClientName}"/>
 
         <!-- Password -->
-        <TextBlock Text="Password:" Grid.Row="1" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Password:" Grid.Row="1" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <PasswordBox x:Name="txtPassword" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
 
         <!-- Full Name -->
-        <TextBlock Text="Full Name:" Grid.Row="2" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Full Name:" Grid.Row="2" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" Text="{Binding Name}"/>
 
         <!-- Birth Date -->
-        <TextBlock Text="Birth Date:" Grid.Row="3" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Birth Date:" Grid.Row="3" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <DatePicker Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" SelectedDate="{Binding BirthDate}"/>
 
         <!-- Age -->
-        <TextBlock Text="Age:" Grid.Row="4" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Age:" Grid.Row="4" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,0,5" Text="{Binding Age}"/>
 
         <!-- Gender -->
-        <TextBlock Text="Gender:" Grid.Row="5" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Gender:" Grid.Row="5" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <ComboBox x:Name="cmbGender" Grid.Row="5" Grid.Column="1" Margin="0,0,0,5" 
                   DisplayMemberPath="GenderDesc"
                   SelectedValuePath="GenderID"
                   SelectedValue="{Binding Gender}"/>
 
         <!-- Status -->
-        <TextBlock Text="Status:" Grid.Row="6" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Status:" Grid.Row="6" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <ComboBox x:Name="cmbStatus" Grid.Row="6" Grid.Column="1" Margin="0,0,0,5" 
                   DisplayMemberPath="StatusDesc"
                   SelectedValuePath="StatusID"
                   SelectedValue="{Binding Status}"/>
 
         <!-- Type -->
-        <TextBlock Text="Type:" Grid.Row="7" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Type:" Grid.Row="7" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <ComboBox x:Name="cmbType" Grid.Row="7" Grid.Column="1" Margin="0,0,0,5" 
                   DisplayMemberPath="TypeDesc"
                   SelectedValuePath="TypeID"
                   SelectedValue="{Binding Type}"/>
 
         <!-- Language -->
-        <TextBlock Text="Language:" Grid.Row="8" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Language:" Grid.Row="8" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <ComboBox x:Name="cmbLanguage" Grid.Row="8" Grid.Column="1" Margin="0,0,0,5" 
                   DisplayMemberPath="LanguageDesc"
                   SelectedValuePath="LanguageID"
                   SelectedValue="{Binding LanguageID}"/>
 
         <!-- Books Quota -->
-        <TextBlock Text="Books Quota:" Grid.Row="9" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Books Quota:" Grid.Row="9" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <TextBox Grid.Row="9" Grid.Column="1" Margin="0,0,0,5" Text="{Binding BooksQuota}"/>
 
         <!-- Borrow Duration -->
-        <TextBlock Text="Borrow Duration:" Grid.Row="10" Grid.Column="0" Margin="0,0,10,5"/>
+        <TextBlock Text="Borrow Duration:" Grid.Row="10" Grid.Column="0" Margin="0,0,10,5" Style="{StaticResource WhiteTextBlockStyle}"/>
         <TextBox Grid.Row="10" Grid.Column="1" Margin="0,0,0,5" Text="{Binding BorrowDuration}"/>
 
         <!-- Action Buttons -->

@@ -9,7 +9,7 @@
         <SolidColorBrush x:Key="LightBlueBrush" Color="#FF7AD0F0"/>
         <SolidColorBrush x:Key="WhiteBrush" Color="#FFFFFFFF"/>
 
-        <Style TargetType="TextBlock">
+        <Style x:Key="WhiteTextBlockStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
@@ -38,12 +38,12 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="3">
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="Center"
-                                              Margin="{TemplateBinding Padding}"/>
+                                          VerticalAlignment="Center"
+                                          Margin="{TemplateBinding Padding}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
