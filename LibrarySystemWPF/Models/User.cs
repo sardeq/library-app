@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace LibrarySystemWPF.Models
 {
+
+    public static class UserSession
+    {
+        public static User CurrentUser { get; set; }
+    }
+
     public class User
     {
         public int ClientID { get; set; }

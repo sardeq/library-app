@@ -91,5 +91,80 @@ namespace LibrarySystemWPF.Services
             bool success = _db.ExecuteNonQuery(deleteQuery, deleteParams);
             return (success, success ? "" : "Failed to delete book");
         }
+
+
+        public List<Book> GetAvailableBooks(int userType)
+        {
+            string query = "SELECT * FROM Books WHERE BooksAvailable > 0";
+            if (userType == 0) // Student
+            {
+                query += " AND BorrowType = 0";
+            }
+
+            DataTable dt = _db.GetData(query);
+            List<Book> books = new List<Book>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                books.Add(new Book
+                {
+                    BookID = row["BookID"].ToString(),
+                    Title = row["Title"].ToString(),
+                    Author = row["Author"].ToString(),
+                    ReleaseDate = Convert.ToDateTime(row["ReleaseDate"]),
+                    BooksAvailable = Convert.ToInt32(row["BooksAvailable"]),
+                    BorrowType = Convert.ToInt32(row["BorrowType"]),
+                    BorrowDuration = Convert.ToInt32(row["BorrowDuration"])
+                });
+            }
+            return books;
+        }
+
+        public List<BorrowedBook> GetBorrowedBooks(int clientId)
+        {
+            string query = @"
+                SELECT b.BookID, bk.Title, b.BorrowDate, b.ReturnDate
+                FROM Borrow b
+                INNER JOIN Books bk ON b.BookID = bk.BookID
+                WHERE b.ClientID = @ClientID 
+                AND b.PendingConfirmation = 0
+                AND b.Returned = 0";
+
+            SqlParameter[] parameters = { new SqlParameter("@ClientID", clientId) };
+            DataTable dt = _db.GetDataN(query, parameters);
+
+            List<BorrowedBook> borrowedBooks = new List<BorrowedBook>();
+            foreach (DataRow row in dt.Rows)
+            {
+                borrowedBooks.Add(new BorrowedBook
+                {
+                    BookID = row["BookID"].ToString(),
+                    Title = row["Title"].ToString(),
+                    BorrowDate = Convert.ToDateTime(row["BorrowDate"]),
+                    DueDate = Convert.ToDateTime(row["ReturnDate"])
+                });
+            }
+            return borrowedBooks;
+        }
+
+        public bool RequestReturn(int clientId, string bookId)
+        {
+            string query = @"UPDATE Borrow SET PendingConfirmation = 1
+                   WHERE ClientID = @ClientID AND BookID = @BookID";
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@ClientID", clientId),
+                new SqlParameter("@BookID", bookId),
+            };
+            return _db.ExecuteNonQuery(query, parameters);
+        }
+    }
+
+    public class BorrowedBook
+    {
+        public string BookID { get; set; }
+        public string Title { get; set; }
+        public DateTime BorrowDate { get; set; }
+        public DateTime DueDate { get; set; }
     }
 }

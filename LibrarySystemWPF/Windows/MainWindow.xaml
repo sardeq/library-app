@@ -39,8 +39,8 @@
 
                 <!-- General -->
                 <Button Content="Chatbot" FontSize="16"/>
-                <Button Content="Borrow Books" FontSize="16"/>
-                <Button Content="My Books" FontSize="16"/>
+                <Button Content="Borrow Books" Click="BorrowBooks_Click" FontSize="16"/>
+                <Button Content="My Books" Click="MyBooks_Click" FontSize="16"/>
 
 
                 <StackPanel VerticalAlignment="Bottom" Margin="0 25 0 0">

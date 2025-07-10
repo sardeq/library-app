@@ -41,5 +41,15 @@ namespace LibrarySystemWPF
         {
             MainContentFrame.Navigate(new ManageBooksPage());
         }
+
+        private void BorrowBooks_Click(object sender, RoutedEventArgs e)
+        {
+            MainContentFrame.Navigate(new BorrowBooksPage());
+        }
+
+        private void MyBooks_Click(object sender, RoutedEventArgs e)
+        {
+            MainContentFrame.Navigate(new MyBooksPage());
+        }
     }
 }
