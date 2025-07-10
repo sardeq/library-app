@@ -39,7 +39,7 @@ namespace LibrarySystemWPF.Pages
                 b.Title,
                 b.Author,
                 b.BooksAvailable,
-                BorrowTypeDesc = b.BorrowType == 0 ? "Student Only" : "Everyone",
+                BorrowTypeDesc = b.BorrowType == 0 ? "Everyone" : "Teachers Only",
                 b.BorrowDuration,
                 IsSelected = false
             }).ToList();
@@ -64,8 +64,17 @@ namespace LibrarySystemWPF.Pages
                 return;
             }
 
-            // Implement borrowing logic here
-            MessageBox.Show($"{selectedBooks.Count} books selected for borrowing");
+            var (success, errors) = _bookService.BorrowBooks(UserSession.CurrentUser.ClientID, selectedBooks);
+            if (success)
+            {
+                MessageBox.Show("Books borrowed successfully.");
+                LoadAvailableBooks(); 
+            }
+            else
+            {
+                string errorMessage = string.Join("\n", errors);
+                MessageBox.Show($"Borrowing failed:\n{errorMessage}");
+            }
         }
     }
 }

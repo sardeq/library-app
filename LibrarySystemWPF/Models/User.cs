@@ -7,6 +7,19 @@ using System.Threading.Tasks;
 namespace LibrarySystemWPF.Models
 {
 
+    public enum UserType
+    {
+        Student = 0,
+        Teacher = 1,
+        Admin = 2
+    }
+
+    public enum Status
+    {
+        Blocked = 0,
+        Active = 1
+    }
+
     public static class UserSession
     {
         public static User CurrentUser { get; set; }

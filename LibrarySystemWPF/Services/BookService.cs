@@ -158,6 +158,138 @@ namespace LibrarySystemWPF.Services
             };
             return _db.ExecuteNonQuery(query, parameters);
         }
+
+        public (bool Success, List<string> Errors) BorrowBooks(int clientId, List<string> bookIds)
+        {
+            var errors = new List<string>();
+            var user = UserSession.CurrentUser;
+
+            if (user.Type != (int)UserType.Admin && user.Status == (int)Status.Blocked)
+            {
+                errors.Add("Account is blocked.");
+                return (false, errors);
+            }
+
+            // Check for overdue books (non-admins only)
+            if (user.Type != (int)UserType.Admin && HasOverdueBooks(clientId))
+            {
+                errors.Add("Account blocked due to overdue books.");
+                return (false, errors);
+            }
+
+            // Check borrowing quota (non-admins only)
+            int currentBorrowed = GetBorrowedCount(clientId);
+            if (user.Type != (int)UserType.Admin && user.BooksQuota - currentBorrowed < bookIds.Count)
+            {
+                errors.Add($"Quota exceeded. Available: {user.BooksQuota - currentBorrowed}");
+                return (false, errors);
+            }
+
+            bool anySuccess = false;
+
+            // Process each book
+            foreach (var bookId in bookIds)
+            {
+                var book = GetBook(bookId);
+                if (book == null)
+                {
+                    errors.Add($"Book {bookId} not found.");
+                    continue;
+                }
+
+                if (book.BooksAvailable <= 0)
+                {
+                    errors.Add($"'{book.Title}' is unavailable.");
+                    continue;
+                }
+
+                if (user.Type != (int)UserType.Admin && user.Type == (int)UserType.Student && book.BorrowType != 0)
+                {
+                    errors.Add($"'{book.Title}' is teacher-only.");
+                    continue;
+                }
+
+                if (BorrowBook(clientId, bookId, user.BorrowDuration, book.BorrowDuration))
+                {
+                    anySuccess = true;
+                }
+                else
+                {
+                    errors.Add($"Failed to borrow '{book.Title}'. You may have already borrowed this book.");
+                }
+            }
+
+            return (anySuccess, errors);
+        }
+
+        private Book GetBook(string bookId)
+        {
+            string query = "SELECT * FROM Books WHERE BookID = @BookID";
+            SqlParameter[] parameters = { new SqlParameter("@BookID", bookId) };
+            DataTable dt = _db.GetDataN(query, parameters);
+
+            if (dt.Rows.Count == 0) return null;
+
+            DataRow row = dt.Rows[0];
+            return new Book
+            {
+                BookID = bookId,
+                Title = row["Title"].ToString(),
+                Author = row["Author"].ToString(),
+                BooksAvailable = Convert.ToInt32(row["BooksAvailable"]),
+                BorrowType = Convert.ToInt32(row["BorrowType"]),
+                BorrowDuration = Convert.ToInt32(row["BorrowDuration"])
+            };
+        }
+
+        private int GetBorrowedCount(int clientId)
+        {
+            string query = @"SELECT COUNT(*) FROM Borrow 
+                     WHERE ClientID = @ClientID 
+                     AND Returned = 0 
+                     AND PendingConfirmation = 0";
+            SqlParameter[] parameters = { new SqlParameter("@ClientID", clientId) };
+            return Convert.ToInt32(_db.ExecuteScalar(query, parameters));
+        }
+
+        public bool HasOverdueBooks(int clientId)
+        {
+            string query = @"SELECT COUNT(*) FROM Borrow 
+                     WHERE ClientID = @ClientID 
+                     AND ReturnDate < GETDATE() 
+                     AND Returned = 0 AND PendingConfirmation = 0";
+            SqlParameter[] parameters = { new SqlParameter("@ClientID", clientId) };
+            return Convert.ToInt32(_db.ExecuteScalar(query, parameters)) > 0;
+        }
+
+        private bool BorrowBook(int clientId, string bookId, int userDuration, int bookDuration)
+        {
+            try
+            {
+                int duration = userDuration > 0 ? userDuration : bookDuration;
+                string query = @"
+            INSERT INTO Borrow (ClientID, BookID, BorrowDate, ReturnDate, Returned, PendingConfirmation)
+            VALUES (@ClientID, @BookID, GETDATE(), DATEADD(day, @Duration, GETDATE()), 0, 0)";
+                SqlParameter[] insertParams = {
+            new SqlParameter("@ClientID", clientId),
+            new SqlParameter("@BookID", bookId),
+            new SqlParameter("@Duration", duration)
+        };
+                _db.ExecuteNonQuery(query, insertParams);
+
+                string updateQuery = "UPDATE Books SET BooksAvailable = BooksAvailable - 1 WHERE BookID = @BookID";
+                _db.ExecuteNonQuery(updateQuery, new[] { new SqlParameter("@BookID", bookId) });
+                return true;
+            }
+            catch (SqlException ex) when (ex.Number == 2627) // Duplicate borrow attempt
+            {
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
     public class BorrowedBook

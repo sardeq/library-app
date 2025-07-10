@@ -101,6 +101,36 @@ namespace LibrarySystemWPF.Services
             return _db.ExecuteNonQuery(query, parameters);
         }
 
+        public User GetUserByUsername(string username)
+        {
+            string query = "SELECT * FROM Clients WHERE ClientName = @Username";
+            SqlParameter[] parameters = { new SqlParameter("@Username", username) };
+            DataTable dt = _db.GetDataN(query, parameters);
+
+            if (dt.Rows.Count == 0) return null;
+
+            DataRow row = dt.Rows[0];
+            return new User
+            {
+                ClientID = Convert.ToInt32(row["ClientID"]),
+                ClientName = row["ClientName"].ToString(),
+                LanguageID = Convert.ToInt32(row["LanguageID"]),
+                Name = row["Name"].ToString(),
+                BirthDate = Convert.ToDateTime(row["BirthDate"]),
+                Age = Convert.ToInt32(row["Age"]),
+                Gender = Convert.ToInt32(row["Gender"]),
+                Status = Convert.ToInt32(row["Status"]),
+                Type = Convert.ToInt32(row["Type"]),
+                Password = row["Password"].ToString(),
+                BooksQuota = Convert.ToInt32(row["BooksQuota"]),
+                BorrowDuration = Convert.ToInt32(row["BorrowDuration"]),
+                GenderDesc = (string)row["GenderDesc"],
+                StatusDesc = (string)row["StatusDesc"],
+                TypeDesc = (string)row["TypeDesc"],
+                LanguageDesc = (string)row["LanguageDesc"]
+            };
+        }
+
         public DataTable GetGenders()
         {
             return _db.GetData("SELECT GenderID, GenderDesc FROM Gender");
