@@ -108,9 +108,9 @@ namespace LibrarySystemWPF.Services
             {
                 books.Add(new Book
                 {
-                    BookID = row["BookID"].ToString(),
-                    Title = row["Title"].ToString(),
-                    Author = row["Author"].ToString(),
+                    BookID = row["BookID"]?.ToString() ?? "",
+                    Title = row["Title"]?.ToString() ?? "",
+                    Author = row["Author"]?.ToString() ?? "",
                     ReleaseDate = Convert.ToDateTime(row["ReleaseDate"]),
                     BooksAvailable = Convert.ToInt32(row["BooksAvailable"]),
                     BorrowType = Convert.ToInt32(row["BorrowType"]),

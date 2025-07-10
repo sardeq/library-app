@@ -103,7 +103,14 @@ namespace LibrarySystemWPF.Services
 
         public User GetUserByUsername(string username)
         {
-            string query = "SELECT * FROM Clients WHERE ClientName = @Username";
+            string query = @"SELECT c.*, g.GenderDesc, s.StatusDesc, t.TypeDesc, l.LanguageDesc
+                     FROM Clients c
+                     LEFT JOIN Gender g ON c.Gender = g.GenderID
+                     LEFT JOIN Status s ON c.Status = s.StatusID
+                     LEFT JOIN Types t ON c.Type = t.TypeID
+                     LEFT JOIN Languages l ON c.LanguageID = l.LanguageID
+                     WHERE c.ClientName = @Username";
+
             SqlParameter[] parameters = { new SqlParameter("@Username", username) };
             DataTable dt = _db.GetDataN(query, parameters);
 
@@ -116,7 +123,7 @@ namespace LibrarySystemWPF.Services
                 ClientName = row["ClientName"].ToString(),
                 LanguageID = Convert.ToInt32(row["LanguageID"]),
                 Name = row["Name"].ToString(),
-                BirthDate = Convert.ToDateTime(row["BirthDate"]),
+                BirthDate = row["BirthDate"] != DBNull.Value ? Convert.ToDateTime(row["BirthDate"]) : DateTime.MinValue,
                 Age = Convert.ToInt32(row["Age"]),
                 Gender = Convert.ToInt32(row["Gender"]),
                 Status = Convert.ToInt32(row["Status"]),
@@ -124,10 +131,10 @@ namespace LibrarySystemWPF.Services
                 Password = row["Password"].ToString(),
                 BooksQuota = Convert.ToInt32(row["BooksQuota"]),
                 BorrowDuration = Convert.ToInt32(row["BorrowDuration"]),
-                GenderDesc = (string)row["GenderDesc"],
-                StatusDesc = (string)row["StatusDesc"],
-                TypeDesc = (string)row["TypeDesc"],
-                LanguageDesc = (string)row["LanguageDesc"]
+                GenderDesc = row["GenderDesc"] != DBNull.Value ? row["GenderDesc"].ToString() : string.Empty,
+                StatusDesc = row["StatusDesc"] != DBNull.Value ? row["StatusDesc"].ToString() : string.Empty,
+                TypeDesc = row["TypeDesc"] != DBNull.Value ? row["TypeDesc"].ToString() : string.Empty,
+                LanguageDesc = row["LanguageDesc"] != DBNull.Value ? row["LanguageDesc"].ToString() : string.Empty
             };
         }
 

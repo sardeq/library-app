@@ -1,10 +1,12 @@
 ﻿// BorrowBooksPage.xaml.cs
 using LibrarySystemWPF.Models;
 using LibrarySystemWPF.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace LibrarySystemWPF.Pages
 {
@@ -18,10 +20,23 @@ namespace LibrarySystemWPF.Pages
             InitializeComponent();
             LoadAvailableBooks();
         }
+        /*
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            LoadAvailableBooks();
+        }*/
 
         private void LoadAvailableBooks(string searchTerm = null)
         {
-            int userType = UserSession.CurrentUser?.Type ?? 0;
+            if (UserSession.CurrentUser == null)
+            {
+                MessageBox.Show("You must be logged in to view available books.");
+                NavigationService?.Navigate(new Uri("/Pages/LoginWindow.xaml", UriKind.Relative));
+                return;
+            }
+
+            int userType = UserSession.CurrentUser.Type;
             _allBooks = _bookService.GetAvailableBooks(userType);
 
             if (!string.IsNullOrEmpty(searchTerm))
@@ -33,14 +48,14 @@ namespace LibrarySystemWPF.Pages
                 ).ToList();
             }
 
-            BooksGrid.ItemsSource = _allBooks.Select(b => new
+            BooksGrid.ItemsSource = _allBooks.Select(b => new BookViewModel 
             {
-                b.BookID,
-                b.Title,
-                b.Author,
-                b.BooksAvailable,
+                BookID = b.BookID,
+                Title = b.Title,
+                Author = b.Author,
+                BooksAvailable = b.BooksAvailable,
                 BorrowTypeDesc = b.BorrowType == 0 ? "Everyone" : "Teachers Only",
-                b.BorrowDuration,
+                BorrowDuration = b.BorrowDuration,
                 IsSelected = false
             }).ToList();
         }
