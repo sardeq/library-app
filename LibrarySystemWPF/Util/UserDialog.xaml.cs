@@ -27,7 +27,6 @@ namespace LibrarySystemWPF
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            // Set password from password box
             if (!string.IsNullOrEmpty(txtPassword.Password))
             {
                 User.Password = txtPassword.Password;

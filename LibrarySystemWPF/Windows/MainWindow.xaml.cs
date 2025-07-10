@@ -36,5 +36,10 @@ namespace LibrarySystemWPF
         {
             MainContentFrame.Navigate(new DashboardPage());
         }
+
+        private void ManageBooks_Click(object sender, RoutedEventArgs e)
+        {
+            MainContentFrame.Navigate(new ManageBooksPage());
+        }
     }
 }

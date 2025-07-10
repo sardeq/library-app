@@ -56,8 +56,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Book.cs" />
+    <Compile Include="Pages\ManageBooksPage.xaml.cs">
+      <DependentUpon>ManageBooksPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ManageUsersPage.xaml.cs">
       <DependentUpon>ManageUsersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\BookService.cs" />
+    <Compile Include="Util\BookDialog.xaml.cs">
+      <DependentUpon>BookDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\UserDialog.xaml.cs">
       <DependentUpon>UserDialog.xaml</DependentUpon>
@@ -72,7 +80,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ManageBooksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ManageUsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Util\BookDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

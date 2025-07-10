@@ -32,7 +32,7 @@
                 
                 <!-- Admin Only -->
                 <Button Content="Manage Users" Click="ManageUsers_Click" FontSize="16" BorderBrush="Red"/>
-                <Button Content="Manage Books" FontSize="16"  BorderBrush="Red"/>
+                <Button Content="Manage Books" Click="ManageBooks_Click" FontSize="16"  BorderBrush="Red"/>
                 <Button Content="Returns" FontSize="16"  BorderBrush="Red"/>
                 <Button Content="Reports" FontSize="16"  BorderBrush="Red"/>
                 <Button Content="Analysis" FontSize="16"  BorderBrush="Red"/>
