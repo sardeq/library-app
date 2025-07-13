@@ -59,7 +59,7 @@ namespace LibrarySystemWPF.Services
                 new SqlParameter("@BorrowDuration", user.BorrowDuration)
             };
 
-            if (user.ClientID == 0) // New user
+            if (user.ClientID == 0)
             {
                 query = @"INSERT INTO Clients (ClientName, LanguageID, Name, BirthDate, Age, Gender, 
                           Status, Type, Password, BooksQuota, BorrowDuration)
@@ -67,7 +67,7 @@ namespace LibrarySystemWPF.Services
                           @Status, @Type, @Password, @BooksQuota, @BorrowDuration)";
                 parameters.Add(new SqlParameter("@Password", (object)user.Password ?? DBNull.Value));
             }
-            else // Update existing user
+            else
             {
                 query = @"UPDATE Clients SET 
                           ClientName = @ClientName,

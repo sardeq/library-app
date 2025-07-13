@@ -3,6 +3,8 @@
 **/obj/
 **/App.config
 App.config
+appsettings.json
+**/appsettings.json
 *.user
 *.suo
 *.db
