@@ -1,5 +1,4 @@
-﻿// ManageUsersPage.xaml.cs
-using LibrarySystemWPF.Models;
+﻿using LibrarySystemWPF.Models;
 using LibrarySystemWPF.Services;
 using System.Windows;
 using System.Windows.Controls;
