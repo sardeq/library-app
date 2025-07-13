@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,9 +14,16 @@ namespace LibraryApp_API.Models
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public int Age { get; set; }
+
+        [Column("Gender")]
         public int GenderID { get; set; }
+
+        [Column("Status")]
         public int StatusID { get; set; }
+
+        [Column("Type")]
         public int TypeID { get; set; }
+
         public string Password { get; set; }
         public int BooksQuota { get; set; }
         public int BorrowDuration { get; set; }

@@ -17,6 +17,12 @@ namespace LibraryApp_API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Status>().ToTable("Status");
+            modelBuilder.Entity<Gender>().ToTable("Gender");
+            modelBuilder.Entity<Models.Type>().ToTable("Types");
+            modelBuilder.Entity<Language>().ToTable("Languages");
+            modelBuilder.Entity<Client>().ToTable("Clients");
+
             modelBuilder.Entity<Client>()
                 .HasOne(c => c.GenderRef)
                 .WithMany()

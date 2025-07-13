@@ -1,5 +1,6 @@
 ﻿using LibrarySystemWPF.Models;
 using LibrarySystemWPF.Services;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,7 +20,14 @@ namespace LibrarySystemWPF.Pages
 
         private async void LoadUsers()
         {
-            UsersGrid.ItemsSource = await _apiClient.GetAllUsers();
+            try
+            {
+                UsersGrid.ItemsSource = await _apiClient.GetAllUsers();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading users: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
