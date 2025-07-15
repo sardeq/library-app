@@ -23,6 +23,8 @@ namespace LibrarySystemWPF.Models
     public static class UserSession
     {
         public static User CurrentUser { get; set; }
+        public static string Token { get; set; }
+
     }
 
     public class User

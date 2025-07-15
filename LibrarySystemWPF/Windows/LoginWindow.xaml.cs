@@ -1,37 +1,52 @@
 ﻿using LibrarySystemWPF.Models;
 using LibrarySystemWPF.Services;
 using System;
-using System.Data.SqlClient;
 using System.Windows;
 
 namespace LibrarySystemWPF
 {
     public partial class LoginWindow : Window
     {
-        private readonly DatabaseService _db = new DatabaseService();
-        private readonly UserService userService = new UserService();
 
         public LoginWindow()
         {
             InitializeComponent();
         }
 
-        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        private async void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             string username = txtUsername.Text;
             string password = txtPassword.Password;
 
-            var user = userService.GetUserByUsername(username);
-            if (user != null && user.Password == password)
+            var apiClient = new ApiClient();
+
+            try
             {
-                UserSession.CurrentUser = user;
-                new MainWindow().Show();
-                this.Close();
+                var result = await apiClient.Login(username, password);
+                if (result != null)
+                {
+                    UserSession.Token = result.Token;
+                    UserSession.CurrentUser = result.User;
+
+                    apiClient.SetToken(UserSession.Token);
+                    new MainWindow().Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid credentials");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Invalid credentials");
+                MessageBox.Show($"Error: {ex.Message}");
             }
         }
+    }
+
+    public class LoginResult
+    {
+        public string Token { get; set; }
+        public User User { get; set; }
     }
 }

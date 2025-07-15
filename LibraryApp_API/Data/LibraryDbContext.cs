@@ -14,7 +14,6 @@ namespace LibraryApp_API.Data
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Models.Type> Types { get; set; }
         public DbSet<Language> Languages { get; set; }
-        //t
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
